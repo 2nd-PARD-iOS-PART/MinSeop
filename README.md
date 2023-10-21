@@ -6,7 +6,7 @@
 1. [HW1] UIKit StoryBoard iOS Calculator
 2. [HW2] UIKit grammer
 3. [HW3] UIKit Netflix clone coding #1
-4. [HW4] UIKit Netflix clone coding #2
+4. [HW4] (https://github.com/2nd-PARD-iOS-PART/iOS_MinSeop/wiki/HW4)UIKit Netflix clone coding #2
 <br><br>
 ### 목표
 * UIKit 기본 익히기
