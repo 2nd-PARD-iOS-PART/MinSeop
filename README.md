@@ -1,10 +1,24 @@
-# Project Title
-
-One Paragraph of project description goes here
+# IOS_KimMinseop swift 정복기
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+0. 함께 자라기 🌱
+1. [HW1] UIKit StoryBoard iOS Calculator
+2. [HW2] UIKit grammer
+3. [HW3] UIKit Netflix clone coding #1
+4. [HW4] UIKit Netflix clone coding #2
+
+<br><br>
+### 목표
+* UIKit 기본 익히기
+* 개념 헛으로 공부하지 않고 꼼꼼하게 보기
+* 숏커톤 준비하기
+* 롱커톤 준비하기
+<br><br>
+### 기간
+20203.09.09 ~ ing
+
+<br><br>
 
 ### Prerequisites
 
@@ -34,11 +48,11 @@ End with an example of getting some data out of the system or using it for a lit
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
+ - 
 
 ### Break down into end to end tests
 
-Explain what these tests test and why
+ - 
 
 ```
 Give an example
@@ -47,10 +61,6 @@ Give an example
 ### And coding style tests
 
 Explain what these tests test and why
-
-```
-Give an example
-```
 
 ## Deployment
 
