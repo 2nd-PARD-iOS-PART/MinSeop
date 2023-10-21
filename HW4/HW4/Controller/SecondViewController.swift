@@ -8,14 +8,14 @@
 import UIKit
 
 class SecondViewController: UIViewController {
+    
     private let SearchTable: UITableView = {
         let table = UITableView()
         table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         return table
     }()
-
-    private let searchController = UISearchController(searchResultsController: nil)
     
+    private let searchController = UISearchController(searchResultsController: nil)
     private let searchBar = UISearchBar()
 
     override func viewDidLoad() {
@@ -49,6 +49,7 @@ class SecondViewController: UIViewController {
         SearchTable.frame = view.bounds
     }
 
+    //Header 라벨 표시하기
     func setHeader() {
         let header = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 50))
         let h_label = UILabel(frame: header.bounds)
@@ -60,9 +61,22 @@ class SecondViewController: UIViewController {
         SearchTable.tableHeaderView = header
     }
 
+    let leftImageView: UIImageView = {
+      let image = UIImageView()
+      image.contentMode = .scaleToFill
+      image.clipsToBounds = true
+      return image
+    }()
+    
+    func configuration(with image: UIImage, name: String){
+      leftImageView.image = image
+    }
+    
     func setTableView() {
         // 위치 설정
+        
         SearchTable.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
             SearchTable.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             SearchTable.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
@@ -78,6 +92,7 @@ class SecondViewController: UIViewController {
         searchBar.searchBarStyle = .minimal
         searchBar.barTintColor = UIColor.gray
         
+        // Search Bar 마이크 모양 설정
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 13, weight: .regular)
         let mic = UIBarButtonItem(image: UIImage(systemName: "mic.fill", withConfiguration: imageConfig), style: .plain, target: self, action: nil)
         mic.tintColor = .white
@@ -98,7 +113,8 @@ extension SecondViewController: UITableViewDelegate, UITableViewDataSource {
 
         // 셀에 텍스트 설정
         cell.textLabel?.text = "Dark"
-
+        
+        
         // 셀을 커스텀하고 버튼을 오른쪽 중앙에 추가
         let playButton = UIButton(type: .system)
         playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)

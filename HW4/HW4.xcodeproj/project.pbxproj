@@ -23,6 +23,8 @@
 		90546AA92AD0058C00D7D35D /* FifthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90546AA82AD0058C00D7D35D /* FifthViewController.swift */; };
 		90546AAC2AD0079600D7D35D /* CollectionViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90546AAB2AD0079600D7D35D /* CollectionViewTableViewCell.swift */; };
 		90546AAE2AD007D600D7D35D /* MediaViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90546AAD2AD007D600D7D35D /* MediaViewCell.swift */; };
+		90546AB52AE3A4A600D7D35D /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90546AB42AE3A4A600D7D35D /* Model.swift */; };
+		90546AB72AE3A4B800D7D35D /* MovieData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90546AB62AE3A4B800D7D35D /* MovieData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +65,8 @@
 		90546AA82AD0058C00D7D35D /* FifthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FifthViewController.swift; sourceTree = "<group>"; };
 		90546AAB2AD0079600D7D35D /* CollectionViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewTableViewCell.swift; sourceTree = "<group>"; };
 		90546AAD2AD007D600D7D35D /* MediaViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaViewCell.swift; sourceTree = "<group>"; };
+		90546AB42AE3A4A600D7D35D /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		90546AB62AE3A4B800D7D35D /* MovieData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +173,7 @@
 		90546AAF2AE3772500D7D35D /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				90546AB42AE3A4A600D7D35D /* Model.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -176,6 +181,7 @@
 		90546AB02AE3773600D7D35D /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				90546AB62AE3A4B800D7D35D /* MovieData.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -312,7 +318,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				90546A742AD0041300D7D35D /* ViewController.swift in Sources */,
+				90546AB72AE3A4B800D7D35D /* MovieData.swift in Sources */,
 				90546AAE2AD007D600D7D35D /* MediaViewCell.swift in Sources */,
+				90546AB52AE3A4A600D7D35D /* Model.swift in Sources */,
 				90546A702AD0041300D7D35D /* AppDelegate.swift in Sources */,
 				90546A722AD0041300D7D35D /* SceneDelegate.swift in Sources */,
 				90546AA72AD0057E00D7D35D /* FourthViewController.swift in Sources */,
