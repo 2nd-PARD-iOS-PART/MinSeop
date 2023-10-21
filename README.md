@@ -7,7 +7,6 @@
 2. [HW2] UIKit grammer
 3. [HW3] UIKit Netflix clone coding #1
 4. [HW4] UIKit Netflix clone coding #2
-
 <br><br>
 ### 목표
 * UIKit 기본 익히기
@@ -17,9 +16,7 @@
 <br><br>
 ### 기간
 20203.09.09 ~ ing
-
 <br><br>
-
 ### Prerequisites
 
 What things you need to install the software and how to install them
@@ -60,11 +57,9 @@ Give an example
 
 ### And coding style tests
 
-Explain what these tests test and why
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
 
 ## Built With
 
