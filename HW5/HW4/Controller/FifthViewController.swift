@@ -10,17 +10,30 @@ import UIKit
 
 class FifthViewController: UIViewController {
     
-    struct Episode {
-        var title: String
-    }
+//    var tableView = UITableView(frame: .zero, style: .grouped)
+//
+//    let imageNames: [String] = ["data2", "data1", "set1", "set2", "set3", "set4", "set1", "set2", "set3"]
+//
+//    let data:[String] = ["New Arrival","New Arrival","New Arrival","New Arrival","New Arrival","New Arrival","New Arrival","New Arrival","New Arrival"]
+//    let name:[String] = ["El Chapo","Peaky Blinders","El Chapo","Peaky Blinders","El Chapo","hello","world","El Chapo","El Chapo"]
+//    let sub: [String] = ["Nov6","Nov6","Nov6","Nov6","Nov6","Nov6","Nov6","Nov6","Nov6","Nov6"]
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        setTableView()
+        
+//        tableView.translatesAutoresizingMaskIntoConstraints = false
+//        self.tableView.dataSource = self         // 테이블 뷰의 데이터 소스 및 델리게이트 설정
+//        self.tableView.delegate = self
+//        tableView.register(UpcomingTableViewCell.self, forCellReuseIdentifier: "UpcomingTableViewCell")
         
         // 1. 스크롤 뷰 생성 및 설정
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(scrollView)
+//      view.addSubview(tableView)
 
         // 2. 이미지 뷰 생성 및 설정
         let imageView = UIImageView()
@@ -164,8 +177,8 @@ class FifthViewController: UIViewController {
         // 탭 바 위치 설정
         tabBarController.view.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(tabBarController.view)
-
         
+
         // 11. 오토 레이아웃 설정
         NSLayoutConstraint.activate([
             // 스크롤 뷰 위치 설정
@@ -249,9 +262,9 @@ class FifthViewController: UIViewController {
             tabBarController.view.topAnchor.constraint(equalTo: label3.bottomAnchor, constant: 60),
             tabBarController.view.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             tabBarController.view.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            tabBarController.view.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            tabBarController.view.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
             
-            ])
+        ])
         // 스크롤 뷰의 컨텐츠 사이즈 설정
         //scrollView.contentSize = CGSize(width: view.frame.width, height: tex.frame.origin.y + tex.frame.size.height + 20)
     }
@@ -268,3 +281,40 @@ class FifthViewController: UIViewController {
         // Download 버튼이 눌렸을 때 실행할 액션을 정의
     }
 }
+
+//extension FifthViewController: UITableViewDataSource {
+//    // 섹션 내 행 수 반환
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return data.count
+//    }
+//
+//    // 특정 행의 셀 반환
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = UpcomingTableViewCell(style: .default, reuseIdentifier: .none)
+//
+//        cell.customtitleLabel.text = data[indexPath.row]
+//        cell.customDaytitleLabel.text = name[indexPath.row]
+//        cell.customSubtitleLabel.text = sub[indexPath.row]
+//
+//        cell.customImageView.image = UIImage(named: imageNames[indexPath.row])
+//
+//        return cell
+//    }
+//
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        let defaultOffset = view.safeAreaInsets.top
+//        let offset = scrollView.contentOffset.y + defaultOffset
+//
+//        navigationController?.navigationBar.transform = .init(translationX: 0, y: min(0, -offset))
+//    }
+//
+//}
+//
+//extension FifthViewController: UITableViewDelegate {
+//    // 특정 행의 높이 반환
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 50
+//    }
+//}
+//
+
