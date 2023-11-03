@@ -9,8 +9,6 @@ import UIKit
 
 
 class FifthViewController: UIViewController {
-
-    var episodes: [Episode] = []
     
     struct Episode {
         var title: String
@@ -18,16 +16,6 @@ class FifthViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Initialize episode data (you can replace this with your actual episode data)
-               episodes = [
-                   Episode(title: "Episode 1"),
-                   Episode(title: "Episode 2"),
-                   Episode(title: "Episode 3"),
-                   Episode(title: "Episode 4"),
-                   Episode(title: "Episode 5")
-               ]
-    
         
         // 1. 스크롤 뷰 생성 및 설정
         let scrollView = UIScrollView()
@@ -51,7 +39,7 @@ class FifthViewController: UIViewController {
         // 4. 라벨 생성 및 설정
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "남과여"
+        label.text = "도둑들"
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold) // 폰트 설정
         label.textColor = .white // 글자색을 흰색으로 설정
         scrollView.addSubview(label)
@@ -147,7 +135,7 @@ class FifthViewController: UIViewController {
         label3.font = UIFont.systemFont(ofSize: 14, weight: .light)
         label3.textColor = .white
         scrollView.addSubview(label3)
-// 스크롤 뷰의 컨텐츠 사이즈 설정
+        // 스크롤 뷰의 컨텐츠 사이즈 설정
         scrollView.contentSize = CGSize(width: view.frame.width, height: label3.frame.origin.y + label3.frame.size.height + 20)
         
         // 8. 탭 바 컨트롤러 생성
@@ -189,7 +177,7 @@ class FifthViewController: UIViewController {
             // 이미지 뷰 위치 설정
             imageView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 20),
             imageView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor), // 왼쪽 정렬
-            imageView.widthAnchor.constraint(equalTo: scrollView.widthAnchor), // 이미지 크기를 화면 너비와 같게 설정
+            imageView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             
             // 버튼 위치 설정
             button.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20),
@@ -211,7 +199,7 @@ class FifthViewController: UIViewController {
             playButton.topAnchor.constraint(equalTo: panel.bottomAnchor, constant: 10),
             playButton.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor), // 왼쪽 정렬
             playButton.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor), // 오른쪽 정렬
-            playButton.widthAnchor.constraint(equalTo: scrollView.widthAnchor), // 가로 크기를 스크롤 뷰의 가로 크기에 맞춤
+            playButton.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
 
             // Download 버튼 위치 설정
             downloadButton.topAnchor.constraint(equalTo: playButton.bottomAnchor, constant: 10),
@@ -240,7 +228,7 @@ class FifthViewController: UIViewController {
 
             // 이미지 버튼 2 위치 설정
             imageButton2.topAnchor.constraint(equalTo: tex.bottomAnchor, constant: 20),
-            imageButton2.leadingAnchor.constraint(equalTo: imageButton1.trailingAnchor, constant: 40), // Adjust spacing
+            imageButton2.leadingAnchor.constraint(equalTo: imageButton1.trailingAnchor, constant: 40),
             imageButton2.widthAnchor.constraint(equalToConstant: 55),
             imageButton2.heightAnchor.constraint(equalToConstant: 55),
         
