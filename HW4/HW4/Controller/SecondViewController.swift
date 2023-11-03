@@ -6,8 +6,12 @@
 //
 
 import UIKit
+import AVFoundation
+import AVKit
 
 class SecondViewController: UIViewController {
+    
+    private var movieData: [MovieData] = []
     
     private let SearchTable: UITableView = {
         let table = UITableView()
@@ -20,63 +24,43 @@ class SecondViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        movieData = MovieData.MovieModelData
+        configureSearchController()
+        setupUI()
+    }
 
-        // UISearchController 설정
+    func configureSearchController() {
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search for a show, movie, genre, etc"
         searchController.searchBar.searchTextField.backgroundColor = UIColor.clear
-
-        let imageConfig = UIImage.SymbolConfiguration(pointSize: 13, weight: .regular)
+        
+        let imageConfig = UIImage.SymbolConfiguration(pointSize: 15, weight: .regular)
         searchController.searchBar.setImage(UIImage(systemName: "mic.fill", withConfiguration: imageConfig), for: .bookmark, state: .normal)
         searchController.searchBar.showsBookmarkButton = true
-
-        // Navigation title 설정
         title = "Search"
-        
-        // Search Bar를 만드는 함수 호출
-        makeSearchBar()
+    }
 
+    func setupUI() {
+        makeSearchBar()
         view.addSubview(SearchTable)
         SearchTable.delegate = self
         SearchTable.dataSource = self
-
         setHeader()
         setTableView()
     }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        SearchTable.frame = view.bounds
-    }
-
-    //Header 라벨 표시하기
+    
     func setHeader() {
         let header = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 50))
         let h_label = UILabel(frame: header.bounds)
-        h_label.text = "Poplular Searches"
+        h_label.text = "Popular Searches"
         h_label.textAlignment = .left
         h_label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         header.addSubview(h_label)
-
         SearchTable.tableHeaderView = header
     }
 
-    let leftImageView: UIImageView = {
-      let image = UIImageView()
-      image.contentMode = .scaleToFill
-      image.clipsToBounds = true
-      return image
-    }()
-    
-    func configuration(with image: UIImage, name: String){
-      leftImageView.image = image
-    }
-    
     func setTableView() {
-        // 위치 설정
-        
         SearchTable.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
             SearchTable.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             SearchTable.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
@@ -84,20 +68,15 @@ class SecondViewController: UIViewController {
             SearchTable.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
         ])
     }
-    
+
     func makeSearchBar() {
         searchBar.placeholder = "Search for a show, movie, genre, etc"
-        
-        // Search Bar 스타일을 minimal로 설정하고 배경색을 회색으로 변경
         searchBar.searchBarStyle = .minimal
         searchBar.barTintColor = UIColor.gray
         
-        // Search Bar 마이크 모양 설정
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 13, weight: .regular)
         let mic = UIBarButtonItem(image: UIImage(systemName: "mic.fill", withConfiguration: imageConfig), style: .plain, target: self, action: nil)
         mic.tintColor = .white
-
-        // navigationItem으로 searchBar, mic 할당
         navigationItem.rightBarButtonItem = mic
         navigationItem.titleView = searchBar
     }
@@ -105,37 +84,57 @@ class SecondViewController: UIViewController {
 
 extension SecondViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        return movieData.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
-        // 셀에 텍스트 설정
-        cell.textLabel?.text = "Dark"
-        
-        
+        let movie = movieData[indexPath.row]
+
+        cell.textLabel?.text = movie.title
+        cell.imageView?.image = UIImage(named: movie.image)
+
         // 셀을 커스텀하고 버튼을 오른쪽 중앙에 추가
         let playButton = UIButton(type: .system)
-        playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
-        playButton.tintColor = .white
-        playButton.frame = CGRect(x: cell.contentView.frame.width - 40, y: cell.contentView.frame.height / 2 - 15, width: 30, height: 30)
-        playButton.addTarget(self, action: #selector(playButtonTapped), for: .touchUpInside)
-        cell.contentView.addSubview(playButton)
+        playButton.setImage(UIImage(systemName: "play.fill"), for: .normal) // 버튼에 재생 아이콘 설정
+        playButton.tintColor = .white // 버튼 아이콘 색상 설정
+        playButton.frame = CGRect(x: cell.contentView.frame.width - 40, y: cell.contentView.frame.height / 2 - 15, width: 30, height: 30) // 버튼 프레임 설정
+        playButton.addTarget(self, action: #selector(playButtonTapped), for: .touchUpInside) // 버튼이 탭되었을 때 실행할 액션 설정
+        cell.contentView.addSubview(playButton) // 셀의 컨텐츠 뷰에 버튼 추가
 
-        return cell
+        return cell // 생성한 셀 반환
     }
 
+    // 셀의 높이 설정
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 160 // 셀의 높이 설정
     }
 
+    // 헤더의 높이 설정
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
+        return 40 // 헤더의 높이 설정
     }
 
-    @objc func playButtonTapped() {
-        // 버튼을 탭했을 때 실행할 동작을 여기에 추가
-        print("Play button tapped")
+    // 재생 버튼이 눌렸을 때 실행되는 함수
+    @objc func playButtonTapped(sender: UIButton) {
+        // 선택한 셀의 indexPath 가져오기
+        if let cell = sender.superview?.superview as? UITableViewCell,
+           let indexPath = SearchTable.indexPath(for: cell) {
+            
+            let selectedMovie = movieData[indexPath.row]
+
+            // 비디오 URL 가져오기
+            if let videoURL = URL(string: selectedMovie.videoURL) {
+                let player = AVPlayer(url: videoURL)
+
+                let playerViewController = AVPlayerViewController()
+                playerViewController.player = player
+
+                present(playerViewController, animated: true) {
+                    playerViewController.player?.play()
+                }
+            }
+        }
     }
 }
