@@ -16,7 +16,7 @@ class FourthViewController: UIViewController {
         configureNavbar()
     }
     
-    private lazy var nextButton: UIButton = {
+    lazy var nextButton: UIButton = {
         let button = UIButton(type: .custom)
         button.backgroundColor = .white
         button.setTitleColor(.black, for: .normal)
@@ -29,7 +29,7 @@ class FourthViewController: UIViewController {
     }()
     
     private func configureNavbar() {
-        let downloadButton = UIBarButtonItem(title: "Download", style: .plain, target: self, action: #selector(barButtonPressed))
+        let downloadButton = UIBarButtonItem(title: "Download", style: .plain, target: self, action: #selector(DownloadButtonPressed))
         downloadButton.tintColor = UIColor.white
         navigationItem.leftBarButtonItem = downloadButton
 
@@ -37,42 +37,32 @@ class FourthViewController: UIViewController {
         trashButton.tintColor = UIColor.white
         navigationItem.rightBarButtonItem = trashButton
     }
-    
-    // 네비게이션 바 버튼 클릭 시 호출되는 함수
-    @objc private func barButtonPressed() {
-        // 네비게이션 바 버튼 클릭 시 동작을 추가할 수 있습니다.
-    }
-    
+
     func makeUi() {
-        
         view.addSubview(nextButton)
         NSLayoutConstraint.activate([
             nextButton.widthAnchor.constraint(equalToConstant: 280),
             nextButton.heightAnchor.constraint(equalToConstant: 40),
-            nextButton.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 550),
-            nextButton.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 60)
+            nextButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 550),
+            nextButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 60)
         ])
         
-        // MARK: - scrollView
         let myScrollView = UIScrollView()
         myScrollView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(myScrollView)
         
-        // MARK: - 스크롤뷰 auto layout
         NSLayoutConstraint.activate([
             myScrollView.topAnchor.constraint(equalTo: self.view.topAnchor),
             myScrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             myScrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             myScrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
         ])
-        
-        // MARK: - 스크롤뷰 content 추가
+    
         let contentView = UIView()
         contentView.translatesAutoresizingMaskIntoConstraints = false
         contentView.backgroundColor = .black
         myScrollView.addSubview(contentView)
         
-        // MARK: - contentView의 오토레이아웃 설정
         NSLayoutConstraint.activate([
             contentView.topAnchor.constraint(equalTo: myScrollView.topAnchor),
             contentView.leadingAnchor.constraint(equalTo: myScrollView.leadingAnchor),
@@ -81,7 +71,6 @@ class FourthViewController: UIViewController {
             contentView.widthAnchor.constraint(equalTo: myScrollView.widthAnchor),
         ])
         
-        // MARK: - contentView에 추가할 content 생성 및 설정
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Movies and TV shows that you\ndownload appear here."
@@ -90,7 +79,6 @@ class FourthViewController: UIViewController {
         label.numberOfLines = 0
         label.textAlignment = .center
         
-        // MARK: - 스크롤 방향 설정
         contentView.addSubview(label)
         
         let imageView = UIImageView(image: UIImage(named: "Image"))
@@ -98,8 +86,6 @@ class FourthViewController: UIViewController {
         imageView.contentMode = .scaleAspectFit
         contentView.addSubview(imageView)
         
-        
-        // MARK: - contentView 안의 contents의 오토레이아웃 설정
         NSLayoutConstraint.activate([
             label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 474),
             label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 60),
@@ -107,24 +93,27 @@ class FourthViewController: UIViewController {
             
             imageView.topAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 248),
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 110),
-            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -110),
+            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -110)
         ])
     }
     
     
     @objc func FindSomethingtoDownloadbuttonPressed(){
-        let secondVC = DownloadsViewController()
-        let navController = UINavigationController(rootViewController: secondVC)
+        print("gdgd")
+        let addMovieVC = DownloadsViewController()
+        let navController = UINavigationController(rootViewController: addMovieVC)
         self.present(navController, animated: true, completion: nil)
     }
     
     @objc func buttonPressed(){
         
-        //present(tabBarVC, animated: true, completion: nil)
     }
     
-    @objc private func trashButtonPressed() {
-        
+    @objc func DownloadButtonPressed() {
+        print("gdgd")
+    }
+    @objc func trashButtonPressed() {
+        print("gdgd")
     }
 
 

@@ -117,14 +117,8 @@ extension SecondViewController: UITableViewDelegate, UITableViewDataSource {
         return 40 // 헤더의 높이 설정
     }
 
-    // 재생 버튼이 눌렸을 때 실행되는 함수
     @objc func playButtonTapped(sender: UIButton) {
-//        // 선택한 셀의 indexPath 가져오기
-//        if let cell = sender.superview?.superview as? UITableViewCell,
-//           let indexPath = SearchTable.indexPath(for: cell) {
-//            
-//            let selectedMovie = movieData[indexPath.row]
-//        }
+        
     }
 
 }
