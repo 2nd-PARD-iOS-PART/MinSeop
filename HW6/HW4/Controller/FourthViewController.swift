@@ -27,7 +27,8 @@ class FourthViewController: UIViewController {
         tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "MovieCell") // 셀 등록
         
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadData), name: NSNotification.Name("ReloadData"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadData), name: NSNotification.Name("newDataAdded"), object: nil)
+
 
         reloadData()
     }
@@ -120,14 +121,12 @@ class FourthViewController: UIViewController {
     }
 
     @objc func buttonPressed(){
-        
     }
     
     @objc func DownloadButtonPressed() {
-        
+
     }
     @objc func trashButtonPressed() {
-        
     }
 }
 
@@ -140,10 +139,14 @@ extension FourthViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath)
         let movie = movies[indexPath.row]
         cell.textLabel?.text = movie.title
-        cell.detailTextLabel?.text = movie.descriptionText // 추가: Movie 객체의 설명을 셀의 서브 타이틀에 표시
+        cell.detailTextLabel?.text = movie.descriptionText
+        if let imageData = movie.imageData {
+            cell.imageView?.image = UIImage(data: imageData)
+        }
         return cell
     }
 }
+
 
 // MARK: - UITableViewDelegate
 extension FourthViewController: UITableViewDelegate {
