@@ -63,22 +63,25 @@ class DownloadsViewController: UIViewController {
         guard let title = titleTextField.text, let description = descriptionTextField.text, let image = movieImageView?.image else {
             return
         }
-        
+
         // 데이터 확인.
         print("Title: \(title), Description: \(description)")
-        
+
         let newMovie = Movie()
         newMovie.title = title
         newMovie.descriptionText = description
         newMovie.imageData = image.jpegData(compressionQuality: 1.0) // 이미지를 JPEG 형식의 Data로 변환
-        
-//        let realm = try! Realm()
+
         try! realm.write {
             realm.add(newMovie)
         }
-        
+
         self.dismiss(animated: true, completion: nil)
+
+        // 데이터를 추가한 후에 FourthViewController를 새로 고칠 때 알림을 보냅니다.
+        NotificationCenter.default.post(name: NSNotification.Name("ReloadData"), object: nil)
     }
+
 
 }
 
