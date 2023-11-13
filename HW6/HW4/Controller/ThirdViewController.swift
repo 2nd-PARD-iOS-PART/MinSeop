@@ -82,6 +82,13 @@ extension ThirdViewController: UITableViewDataSource {
         
         return cell
     }
+
+    
+
+    // 섹션 헤더 타이틀 반환
+//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return header[section]
+//    }
     
     // 스크롤 시 네비게이션 바 이동 및 크기 조절
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

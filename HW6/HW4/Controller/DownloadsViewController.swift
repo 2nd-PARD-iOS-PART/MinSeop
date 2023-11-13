@@ -8,25 +8,114 @@
 import UIKit
 
 class DownloadsViewController: UIViewController {
+    var imageSelectButton: UIButton? // 이미지 선택 버튼을 클래스 수준 변수로 선언
+    var titleTextField: UITextField!
+    var descriptionTextField: UITextField!
+    var movieImageView: UIImageView?
+    var imagePicker: UIImagePickerController!
     
-    private let movieTitleTextField: UITextField = {
-            let textField = UITextField()
-            textField.translatesAutoresizingMaskIntoConstraints = false
-            return textField
-        }()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .black
         
-        override func viewDidLoad() {
-            super.viewDidLoad()
-            view.backgroundColor = .white
-            print("ㅎㅇㅎㅇ3")
+        setupUI()
+        setupImagePicker()
+    }
+    
+    func setupUI() {
+        titleTextField = createTextField(placeholder: "영화 제목을 입력하시오.")
+        descriptionTextField = createTextField(placeholder: "줄거리를 입력하시오.")
+        imageSelectButton = createImageView() // 이미지 선택 버튼 초기화
 
-            layout()
+        let submitButton = createSubmitButton()
+        
+        NSLayoutConstraint.activate([
+            titleTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            titleTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            
+            descriptionTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            descriptionTextField.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 40),
+            
+            imageSelectButton!.centerXAnchor.constraint(equalTo: view.centerXAnchor), // 이미지 선택 버튼 수정
+            imageSelectButton!.topAnchor.constraint(equalTo: descriptionTextField.bottomAnchor, constant: 20),
+            imageSelectButton!.widthAnchor.constraint(equalToConstant: 200),
+            imageSelectButton!.heightAnchor.constraint(equalToConstant: 50),
+            
+            submitButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            submitButton.topAnchor.constraint(equalTo: view.bottomAnchor, constant: -120)
+        ])
+    }
+    
+    func setupImagePicker() {
+        imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = .photoLibrary
+    }
+    
+    @objc func imageTapped() {
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
+    @objc func submitButtonPressed() {
+        guard let title = titleTextField.text, let description = descriptionTextField.text else {
+            return
         }
         
-        private func layout() {
-            print("ㅎㅇㅎㅇ2")
-
-            view.addSubview(movieTitleTextField)
-        }
+        // 데이터 확인.
+        print("Title: \(title), Description: \(description)")
+    }
 }
 
+extension DownloadsViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            if movieImageView == nil {
+                movieImageView = UIImageView()
+                movieImageView?.contentMode = .scaleAspectFit
+                movieImageView?.translatesAutoresizingMaskIntoConstraints = false
+                view.addSubview(movieImageView!)
+                
+                NSLayoutConstraint.activate([
+                    movieImageView!.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                    movieImageView!.topAnchor.constraint(equalTo: imageSelectButton!.bottomAnchor, constant: 20),
+                    movieImageView!.widthAnchor.constraint(equalToConstant: 300), // 이미지뷰 크기 조절
+                    movieImageView!.heightAnchor.constraint(equalToConstant: 300), // 이미지뷰 크기 조절
+                ])
+            }
+            movieImageView?.image = selectedImage
+        }
+        dismiss(animated: true, completion: nil)
+    }
+}
+
+extension DownloadsViewController {
+    func createTextField(placeholder: String) -> UITextField {
+        let textField = UITextField()
+        let fontSize: CGFloat = 18
+        textField.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize)])
+        textField.borderStyle = .roundedRect
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(textField)
+        return textField
+    }
+    
+    func createSubmitButton() -> UIButton {
+        let button = UIButton(type: .system)
+        button.setTitle("Download", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 24)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(submitButtonPressed), for: .touchUpInside)
+        view.addSubview(button)
+        return button
+    }
+    
+    func createImageView() -> UIButton {
+        let button = UIButton(type: .system)
+        button.setTitle("이미지 선택", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+        button.addTarget(self, action: #selector(imageTapped), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(button)
+        return button
+    }
+}

@@ -6,15 +6,22 @@
 //
 
 import UIKit
-import Realm
+import RealmSwift
 
 class FourthViewController: UIViewController {
 
+    var realm: Realm! // Realm 데이터베이스를 인스턴스 변수로 이동
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+
         makeUi()
         configureNavbar()
+        print(Realm.Configuration.defaultConfiguration.fileURL) // 데이터를 확인하기 위한 것
+
     }
+
     
     lazy var nextButton: UIButton = {
         let button = UIButton(type: .custom)
@@ -46,31 +53,7 @@ class FourthViewController: UIViewController {
             nextButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 550),
             nextButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 60)
         ])
-        
-        let myScrollView = UIScrollView()
-        myScrollView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(myScrollView)
-        
-        NSLayoutConstraint.activate([
-            myScrollView.topAnchor.constraint(equalTo: self.view.topAnchor),
-            myScrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            myScrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            myScrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
-        ])
     
-        let contentView = UIView()
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.backgroundColor = .black
-        myScrollView.addSubview(contentView)
-        
-        NSLayoutConstraint.activate([
-            contentView.topAnchor.constraint(equalTo: myScrollView.topAnchor),
-            contentView.leadingAnchor.constraint(equalTo: myScrollView.leadingAnchor),
-            contentView.trailingAnchor.constraint(equalTo: myScrollView.trailingAnchor),
-            contentView.bottomAnchor.constraint(equalTo: myScrollView.bottomAnchor),
-            contentView.widthAnchor.constraint(equalTo: myScrollView.widthAnchor),
-        ])
-        
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Movies and TV shows that you\ndownload appear here."
@@ -79,42 +62,40 @@ class FourthViewController: UIViewController {
         label.numberOfLines = 0
         label.textAlignment = .center
         
-        contentView.addSubview(label)
+        view.addSubview(label)
         
         let imageView = UIImageView(image: UIImage(named: "Image"))
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
-        contentView.addSubview(imageView)
+        view.addSubview(imageView)
         
         NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 474),
-            label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 60),
-            label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -60),
+            label.topAnchor.constraint(equalTo: view.topAnchor, constant: 474),
+            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 60),
+            label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -60),
             
-            imageView.topAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 248),
-            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 110),
-            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -110)
+            imageView.topAnchor.constraint(equalTo: label.topAnchor, constant: -250), // 이미지 뷰를 레이블 아래로 이동
+            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 110),
+            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -110)
         ])
+
     }
     
     
     @objc func FindSomethingtoDownloadbuttonPressed(){
-        print("gdgd")
         let addMovieVC = DownloadsViewController()
         let navController = UINavigationController(rootViewController: addMovieVC)
         self.present(navController, animated: true, completion: nil)
     }
-    
+
     @objc func buttonPressed(){
         
     }
     
     @objc func DownloadButtonPressed() {
-        print("gdgd")
+        
     }
     @objc func trashButtonPressed() {
-        print("gdgd")
+        
     }
-
-
 }
