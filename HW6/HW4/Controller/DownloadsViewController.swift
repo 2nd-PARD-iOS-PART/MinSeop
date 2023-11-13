@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import RealmSwift
+
+let realm = try! Realm()
 
 class DownloadsViewController: UIViewController {
     var imageSelectButton: UIButton? // 이미지 선택 버튼을 클래스 수준 변수로 선언
@@ -57,13 +60,26 @@ class DownloadsViewController: UIViewController {
     }
     
     @objc func submitButtonPressed() {
-        guard let title = titleTextField.text, let description = descriptionTextField.text else {
+        guard let title = titleTextField.text, let description = descriptionTextField.text, let image = movieImageView?.image else {
             return
         }
         
         // 데이터 확인.
         print("Title: \(title), Description: \(description)")
+        
+        let newMovie = Movie()
+        newMovie.title = title
+        newMovie.descriptionText = description
+        newMovie.imageData = image.jpegData(compressionQuality: 1.0) // 이미지를 JPEG 형식의 Data로 변환
+        
+//        let realm = try! Realm()
+        try! realm.write {
+            realm.add(newMovie)
+        }
+        
+        self.dismiss(animated: true, completion: nil)
     }
+
 }
 
 extension DownloadsViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
