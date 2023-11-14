@@ -9,6 +9,7 @@
 4. [HW4](https://github.com/2nd-PARD-iOS-PART/iOS_MinSeop/wiki/HW4) UIKit Netflix clone coding #2
 5. [HW5](https://github.com/2nd-PARD-iOS-PART/iOS_MinSeop/wiki/HW5) UIKit Netflix clone coding #3
 6. [HW6](https://github.com/2nd-PARD-iOS-PART/iOS_MinSeop/wiki/HW6) UIKit Netflix clone coding #4
+7. [HW7](https://github.com/2nd-PARD-iOS-PART/iOS_MinSeop/wiki/HW7) URL Session_Server #1
 <br><br>
 ### 목표
 * UIKit 기본 익히기
